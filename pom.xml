@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.com.sunflowerstore</groupId>
+    <artifactId>programatcc</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <packaging>war</packaging> <!-- define o formato do pacote para exportação -->
+
+    <properties><!--Propriedades do projeto-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- codificação da build-->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <failOnMissingWebXML>false</failOnMissingWebXML>
+        <!--Versões das dependências (separadas por dependência) -->
+        <java.version>1.8</java.version>
+        <maven-compiler-pluging.version>3.2</maven-compiler-pluging.version>
+        <!-- SPRING MVC -->
+        <spring-framework.version>4.3.7.RELEASE</spring-framework.version> <!-- versão do spring framework no BOM (build of material - lista de materiais) -->
+        <!-- SERVLET API -->
+        <servlet.version>3.1.0</servlet.version>
+        <!-- THYMELEAF -->
+        <thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
+        <!-- HIBERNATE VALIDATOR -->
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <!-- THYMELEAF LAYOUT DIALECT-->
+        <thymeleaf-layout-dialect.version>2.1.2</thymeleaf-layout-dialect.version>
+    </properties>
+
+    <build> <!--Compilador do maven-->
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-pluging.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement> <!--Gerenciador de dependências do Spring-->
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId> <!-- bom é gerenciador de dependencias para lançar as versões automaticamente conforme o version abaixo -->
+                <version>${spring-framework.version}</version> <!--fornece as versões conforme indicado em properties-->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- SPRING MVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId><!--não precisa mais indicar a versão -->
+            <scope>compile</scope> <!--escopo DEFAULT (precisa sempre desta dependência) -->
+        </dependency>
+
+        <!-- SERVLET API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope> <!-- servlet api já existe no tomcat server por isso que está provided, quando for distribuir não vai levar as bibliotecas do servlet junto -->
+        </dependency>
+
+        <!-- THYMELEAF -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- BEAN VALIDATION / HIBERNATE VALIDATOR -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--THYMELEAF LAYOUT DIALECT-->
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+            <version>${thymeleaf-layout-dialect.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>
